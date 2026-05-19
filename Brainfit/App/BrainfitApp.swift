@@ -11,23 +11,35 @@ struct BrainfitApp: App {
 
     var body: some Scene {
         WindowGroup {
-            Group {
-                if let environment {
-                    Text("Core OK · Spill registrert: \(environment.registry.allGames.count)")
-                        .font(.headline)
-                } else if let initError {
-                    Text("Init feilet: \(initError)")
-                        .foregroundStyle(.red)
-                } else {
-                    ProgressView()
+            if Self.isRunningTests {
+                // Placeholder under tester — unngå å initialisere AppEnvironment
+                Text("Tests")
+            } else {
+                Group {
+                    if let environment {
+                        RootView(environment: environment)
+                    } else if let initError {
+                        VStack(spacing: 16) {
+                            Image(systemName: "exclamationmark.triangle.fill")
+                                .font(.largeTitle)
+                                .foregroundStyle(.orange)
+                            Text("Klarte ikke å starte appen")
+                                .font(.headline)
+                            Text(initError)
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                        .padding()
+                    } else {
+                        ProgressView()
+                    }
                 }
-            }
-            .task {
-                guard !Self.isRunningTests else { return }
-                do {
-                    environment = try AppEnvironment()
-                } catch {
-                    initError = error.localizedDescription
+                .task {
+                    do {
+                        environment = try AppEnvironment()
+                    } catch {
+                        initError = error.localizedDescription
+                    }
                 }
             }
         }
