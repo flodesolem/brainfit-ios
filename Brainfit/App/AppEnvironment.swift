@@ -21,5 +21,7 @@ public final class AppEnvironment {
         self.engine = DailySessionEngine(runs: runs, streaks: streaks)
         self.registry = GameRegistry()
         self.sessionState = SessionState()
+        self.registry.register(NBackGame())
+        self.registry.register(TapTheColorGame())
     }
 }
