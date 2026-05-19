@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Spørsmål eller diskusjon
+    url: https://github.com/frodesolem/brainfit-ios/discussions
+    about: For spørsmål, ikke bug-rapport eller funksjonsforslag
