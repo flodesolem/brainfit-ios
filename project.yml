@@ -102,6 +102,7 @@ targets:
           - UIInterfaceOrientationPortrait
         CFBundleDisplayName: Brainfit
         WKApplication: true
+        WKWatchOnly: true
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.frodesolem.brainfit.watchkitapp
