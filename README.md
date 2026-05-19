@@ -1,6 +1,10 @@
 # Brainfit
 
-Åpen kildekode iOS-app for hjernetrim, inspirert av Lumosity og Elevate. Bygd på en utvidbar plattform-arkitektur som lar bidragsytere legge til nye spill ved å implementere én protokoll.
+[![CI](https://github.com/frodesolem/brainfit-ios/actions/workflows/ci.yml/badge.svg)](https://github.com/frodesolem/brainfit-ios/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![iOS 17+](https://img.shields.io/badge/iOS-17%2B-blue.svg)](https://developer.apple.com/ios)
+
+Åpen kildekode iOS-app for hjernetrim, inspirert av Lumosity og Elevate.
 
 ## Funksjoner
 
