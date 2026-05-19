@@ -28,6 +28,10 @@ public struct HomeView: View {
             Text(dateString)
                 .font(Theme.FontStyle.caption)
                 .foregroundStyle(.brainfitMutedText)
+            Text("Be Fit as a Sedighi")
+                .font(.caption.italic())
+                .foregroundStyle(.brainfitMutedText)
+                .padding(.top, Theme.Spacing.xs)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.top, Theme.Spacing.lg)
