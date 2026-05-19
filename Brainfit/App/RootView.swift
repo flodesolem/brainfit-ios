@@ -3,7 +3,12 @@ import SwiftUI
 struct RootView: View {
     let environment: AppEnvironment
 
+    @AppStorage("appearanceMode") private var appearanceModeRaw: String = AppearanceMode.system.rawValue
     @State private var showingSession = false
+
+    private var appearanceMode: AppearanceMode {
+        AppearanceMode(rawValue: appearanceModeRaw) ?? .system
+    }
 
     var body: some View {
         TabView {
@@ -23,6 +28,7 @@ struct RootView: View {
             SettingsView()
                 .tabItem { Label("Innstillinger", systemImage: "gearshape.fill") }
         }
+        .preferredColorScheme(appearanceMode.colorScheme)
         .fullScreenCover(isPresented: $showingSession) {
             SessionFlowView(
                 registry: environment.registry,
@@ -31,6 +37,7 @@ struct RootView: View {
                 state: environment.sessionState,
                 onClose: { showingSession = false }
             )
+            .preferredColorScheme(appearanceMode.colorScheme)
         }
     }
 

@@ -2,12 +2,17 @@ import SwiftUI
 import UserNotifications
 
 public struct SettingsView: View {
+    @AppStorage("appearanceMode") private var appearanceModeRaw: String = AppearanceMode.system.rawValue
     @State private var reminderEnabled: Bool = UserDefaults.standard.bool(forKey: "reminderEnabled")
     @State private var reminderTime: Date = SettingsView.loadReminderTime()
     @State private var soundEnabled: Bool = UserDefaults.standard.object(forKey: "soundEnabled") as? Bool ?? true
     @State private var iCloudStatus: String = "Sjekker…"
 
     public init() {}
+
+    private var appearanceMode: AppearanceMode {
+        AppearanceMode(rawValue: appearanceModeRaw) ?? .system
+    }
 
     public var body: some View {
         NavigationStack {
@@ -17,6 +22,15 @@ public struct SettingsView: View {
                         Image(systemName: "icloud.fill")
                         Text(iCloudStatus)
                     }
+                }
+
+                Section("Utseende") {
+                    Picker("Tema", selection: $appearanceModeRaw) {
+                        ForEach(AppearanceMode.allCases) { mode in
+                            Text(mode.label).tag(mode.rawValue)
+                        }
+                    }
+                    .pickerStyle(.segmented)
                 }
 
                 Section("Påminnelse") {
