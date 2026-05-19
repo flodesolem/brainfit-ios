@@ -1,0 +1,35 @@
+# Xcode
+build/
+DerivedData/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+*.moved-aside
+*.xccheckout
+*.xcscmblueprint
+*.xcuserstate
+
+# Swift Package Manager
+.swiftpm/
+Packages/
+Package.resolved
+*.xcodeproj/xcuserdata/
+
+# CocoaPods (not used, but defensive)
+Pods/
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# xcodegen artifact (we commit project.yml, regenerate .xcodeproj)
+*.xcodeproj
