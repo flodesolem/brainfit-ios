@@ -33,14 +33,17 @@ targets:
           - UIInterfaceOrientationPortrait
         CFBundleDisplayName: Brainfit
         NSUserNotificationUsageDescription: Brainfit sender deg en daglig påminnelse om dagens trening.
-    entitlements:
-      path: Brainfit/Brainfit.entitlements
-      properties:
-        com.apple.developer.icloud-container-identifiers:
-          - iCloud.com.frodesolem.brainfit
-        com.apple.developer.icloud-services:
-          - CloudKit
-        com.apple.developer.ubiquity-kvstore-identifier: $(TeamIdentifierPrefix)com.frodesolem.brainfit
+    # CloudKit-entitlements er midlertidig fjernet — Personal Team (gratis Apple ID)
+    # støtter ikke iCloud-containers. Reverter denne committen + ModelContainer-fallback
+    # når Apple Developer Program ($99/år) er på plass.
+    # entitlements:
+    #   path: Brainfit/Brainfit.entitlements
+    #   properties:
+    #     com.apple.developer.icloud-container-identifiers:
+    #       - iCloud.com.frodesolem.brainfit
+    #     com.apple.developer.icloud-services:
+    #       - CloudKit
+    #     com.apple.developer.ubiquity-kvstore-identifier: $(TeamIdentifierPrefix)com.frodesolem.brainfit
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.frodesolem.brainfit
