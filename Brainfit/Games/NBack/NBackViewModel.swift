@@ -90,8 +90,12 @@ public final class NBackViewModel {
         for _ in 0..<config.stimuliPerRound {
             positions.append(Int(rng.nextUInt64() % UInt64(gridCells)))
         }
-        // ~30 % targets: tving noen til match
-        let targetIndices = Set(Array(config.n..<positions.count).shuffled(using: &rng).prefix(config.stimuliPerRound / 3))
+        // ~30 % targets: tving noen til match. Sortert iterasjon for determinisme
+        // (Set-iterasjon i Swift har ikke-deterministisk rekkefølge per prosess).
+        let targetIndices = Array(config.n..<positions.count)
+            .shuffled(using: &rng)
+            .prefix(config.stimuliPerRound / 3)
+            .sorted()
         for index in targetIndices where index >= config.n {
             positions[index] = positions[index - config.n]
         }
