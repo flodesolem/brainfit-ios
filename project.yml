@@ -76,6 +76,41 @@ targets:
         TEST_TARGET_NAME: Brainfit
         GENERATE_INFOPLIST_FILE: "YES"
 
+  BrainfitWatch:
+    type: application
+    platform: watchOS
+    deploymentTarget: "10.0"
+    sources:
+      - path: BrainfitWatch
+        excludes:
+          - "**/*.md"
+      # Gjenbruk delte filer fra iOS-targeten:
+      - path: Brainfit/Core
+      - path: Brainfit/Engine
+      - path: Brainfit/Persistence
+      - path: Brainfit/Games/NBack/NBackConfig.swift
+      - path: Brainfit/Games/NBack/NBackScorer.swift
+      - path: Brainfit/Games/NBack/NBackViewModel.swift
+      - path: Brainfit/Games/TapTheColor/StroopConfig.swift
+      - path: Brainfit/Games/TapTheColor/StroopScorer.swift
+      - path: Brainfit/Games/TapTheColor/StroopViewModel.swift
+      - path: Brainfit/DesignSystem
+    info:
+      path: BrainfitWatch/Info.plist
+      properties:
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        CFBundleDisplayName: Brainfit
+        WKApplication: true
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.frodesolem.brainfit.watchkitapp
+        GENERATE_INFOPLIST_FILE: "NO"
+        TARGETED_DEVICE_FAMILY: "4"
+        SWIFT_VERSION: "5.10"
+        SWIFT_STRICT_CONCURRENCY: complete
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+
 schemes:
   Brainfit:
     build:
@@ -88,3 +123,7 @@ schemes:
         - BrainfitTests
         - BrainfitUITests
       gatherCoverageData: true
+  BrainfitWatch:
+    build:
+      targets:
+        BrainfitWatch: all

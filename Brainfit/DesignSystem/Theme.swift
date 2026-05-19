@@ -23,7 +23,25 @@ public enum Theme {
 }
 
 public extension ShapeStyle where Self == Color {
-    static var brainfitBackground: Color { Color(.systemBackground) }
-    static var brainfitCard: Color { Color(.secondarySystemBackground) }
-    static var brainfitMutedText: Color { Color(.secondaryLabel) }
+    static var brainfitBackground: Color {
+        #if os(watchOS)
+        return Color.black
+        #else
+        return Color(.systemBackground)
+        #endif
+    }
+    static var brainfitCard: Color {
+        #if os(watchOS)
+        return Color.gray.opacity(0.2)
+        #else
+        return Color(.secondarySystemBackground)
+        #endif
+    }
+    static var brainfitMutedText: Color {
+        #if os(watchOS)
+        return Color.gray
+        #else
+        return Color(.secondaryLabel)
+        #endif
+    }
 }
