@@ -1,0 +1,38 @@
+included:
+  - Brainfit
+  - BrainfitTests
+  - BrainfitUITests
+
+excluded:
+  - Brainfit/Assets.xcassets
+
+disabled_rules:
+  - trailing_whitespace
+  - todo
+
+opt_in_rules:
+  - empty_count
+  - empty_string
+  - explicit_init
+  - first_where
+  - last_where
+  - unused_import
+  - vertical_whitespace_closing_braces
+  - closure_spacing
+
+line_length:
+  warning: 140
+  error: 200
+  ignores_comments: true
+
+type_name:
+  min_length: 2
+  max_length: 60
+
+identifier_name:
+  min_length: 1
+  excluded:
+    - id
+    - n
+    - x
+    - y
