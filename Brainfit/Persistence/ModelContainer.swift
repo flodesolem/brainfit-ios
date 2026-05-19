@@ -10,16 +10,22 @@ public enum BrainfitModelContainer {
 
     public static func makeContainer(inMemory: Bool = false) throws -> ModelContainer {
         let schema = Schema(allModels)
-        let config: ModelConfiguration
         if inMemory {
-            config = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
-        } else {
-            config = ModelConfiguration(
-                schema: schema,
-                isStoredInMemoryOnly: false,
-                cloudKitDatabase: .private("iCloud.com.frodesolem.brainfit")
-            )
+            let config = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
+            return try ModelContainer(for: schema, configurations: [config])
         }
-        return try ModelContainer(for: schema, configurations: [config])
+        let cloudConfig = ModelConfiguration(
+            schema: schema,
+            isStoredInMemoryOnly: false,
+            cloudKitDatabase: .private("iCloud.com.frodesolem.brainfit")
+        )
+        do {
+            return try ModelContainer(for: schema, configurations: [cloudConfig])
+        } catch {
+            // Fall back til lokal-only når CloudKit-entitlements ikke er
+            // tilgjengelig (typisk i simulator-tester med CODE_SIGNING_ALLOWED=NO).
+            let localConfig = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+            return try ModelContainer(for: schema, configurations: [localConfig])
+        }
     }
 }
