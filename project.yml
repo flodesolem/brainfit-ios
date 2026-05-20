@@ -94,6 +94,9 @@ targets:
       - path: Brainfit/Games/TapTheColor/StroopConfig.swift
       - path: Brainfit/Games/TapTheColor/StroopScorer.swift
       - path: Brainfit/Games/TapTheColor/StroopViewModel.swift
+      - path: Brainfit/Games/Hoderegning/HoderegningConfig.swift
+      - path: Brainfit/Games/Hoderegning/HoderegningScorer.swift
+      - path: Brainfit/Games/Hoderegning/HoderegningViewModel.swift
       - path: Brainfit/DesignSystem
     info:
       path: BrainfitWatch/Info.plist
