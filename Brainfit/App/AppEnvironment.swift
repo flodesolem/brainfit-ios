@@ -23,5 +23,6 @@ public final class AppEnvironment {
         self.sessionState = SessionState()
         self.registry.register(NBackGame())
         self.registry.register(TapTheColorGame())
+        self.registry.register(HoderegningGame())
     }
 }

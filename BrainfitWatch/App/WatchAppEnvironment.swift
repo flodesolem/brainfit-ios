@@ -23,5 +23,6 @@ public final class WatchAppEnvironment {
         self.sessionState = SessionState()
         self.registry.register(NBackWatchGame())
         self.registry.register(TapTheColorWatchGame())
+        self.registry.register(HoderegningWatchGame())
     }
 }
