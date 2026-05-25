@@ -106,6 +106,9 @@ targets:
       - path: Brainfit/Games/Hoderegning/HoderegningConfig.swift
       - path: Brainfit/Games/Hoderegning/HoderegningScorer.swift
       - path: Brainfit/Games/Hoderegning/HoderegningViewModel.swift
+      - path: Brainfit/Games/Reaksjon/ReaksjonConfig.swift
+      - path: Brainfit/Games/Reaksjon/ReaksjonScorer.swift
+      - path: Brainfit/Games/Reaksjon/ReaksjonViewModel.swift
       - path: Brainfit/DesignSystem
     info:
       path: BrainfitWatch/Info.plist
