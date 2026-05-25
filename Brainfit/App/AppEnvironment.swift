@@ -24,5 +24,6 @@ public final class AppEnvironment {
         self.registry.register(NBackGame())
         self.registry.register(TapTheColorGame())
         self.registry.register(HoderegningGame())
+        self.registry.register(ReaksjonGame())
     }
 }

@@ -24,5 +24,6 @@ public final class WatchAppEnvironment {
         self.registry.register(NBackWatchGame())
         self.registry.register(TapTheColorWatchGame())
         self.registry.register(HoderegningWatchGame())
+        self.registry.register(ReaksjonWatchGame())
     }
 }
