@@ -27,10 +27,11 @@ struct NBackWatchPlayView: View {
                 viewModel.registerMatchTap()
             } label: {
                 Text("MATCH")
-                    .font(.caption.bold())
-                    .frame(maxWidth: .infinity)
+                    .font(.caption2.bold())
+                    .frame(maxWidth: .infinity, maxHeight: 14)
             }
             .buttonStyle(.borderedProminent)
+            .controlSize(.mini)
             .tint(.accentColor)
             .disabled(viewModel.currentStimulus == nil)
         }
