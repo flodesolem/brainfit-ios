@@ -18,11 +18,12 @@ public extension Game {
     static var id: String { metadata.id }
 }
 
-public struct AnyGame: Sendable {
+public struct AnyGame {
     public let metadata: GameMetadata
     private let _makeIntroView: @MainActor () -> AnyView
     private let _makePlayView: @MainActor (Difficulty, @escaping @MainActor (GameResult) -> Void) -> AnyView
 
+    @MainActor
     public init<G: Game>(_ game: G) {
         self.metadata = G.metadata
         let captured = game
