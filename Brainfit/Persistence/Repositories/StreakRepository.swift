@@ -1,6 +1,7 @@
 import Foundation
 import SwiftData
 
+@MainActor
 public protocol StreakRepository: AnyObject, Sendable {
     func load() throws -> StreakState
     func save(_ state: StreakState) throws

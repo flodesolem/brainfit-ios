@@ -1,6 +1,7 @@
 import Foundation
 import SwiftData
 
+@MainActor
 public protocol GameRunRepository: AnyObject, Sendable {
     func save(_ run: GameRun) throws
     func recent(forGameId gameId: String, limit: Int) throws -> [GameRun]
