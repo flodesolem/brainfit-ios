@@ -22,16 +22,16 @@ struct NBackWatchPlayView: View {
                 .foregroundStyle(.secondary)
 
             grid
+                .frame(maxWidth: 140, maxHeight: 140)
 
             Button {
                 viewModel.registerMatchTap()
             } label: {
                 Text("MATCH")
-                    .font(.caption2.bold())
-                    .frame(maxWidth: .infinity, maxHeight: 14)
+                    .font(.caption.bold())
+                    .frame(maxWidth: .infinity)
             }
             .buttonStyle(.borderedProminent)
-            .controlSize(.mini)
             .tint(.accentColor)
             .disabled(viewModel.currentStimulus == nil)
         }
