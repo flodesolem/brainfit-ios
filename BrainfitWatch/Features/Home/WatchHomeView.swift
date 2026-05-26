@@ -29,7 +29,7 @@ struct WatchHomeView: View {
             Spacer(minLength: 4)
 
             Button {
-                let ids = registry.allGames.map(\.metadata.id)
+                let ids = engine.todaysGameIds(from: registry, count: 3)
                 onStartSession(ids)
             } label: {
                 Text(didToday ? "Tren igjen" : "Start")

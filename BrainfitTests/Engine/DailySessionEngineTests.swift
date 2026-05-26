@@ -92,4 +92,66 @@ final class DailySessionEngineTests: XCTestCase {
         )
         XCTAssertEqual(try engine.recommendedDifficulty(forGameId: "nback"), .medium)
     }
+
+    // MARK: - todaysGameIds
+
+    func testTodaysGameIdsReturnsAllWhenLessThanRequested() {
+        let engine = DailySessionEngine(runs: FakeRunRepo(), streaks: FakeStreakRepo(),
+                                        calendar: .current, now: { Date() })
+        let reg = GameRegistry()  // empty
+        XCTAssertEqual(engine.todaysGameIds(from: reg, count: 3), [])
+    }
+
+    func testTodaysGameIdsIsDeterministicForSameDay() {
+        let fixed = Date(timeIntervalSince1970: 1_700_000_000)
+        let engine = DailySessionEngine(runs: FakeRunRepo(), streaks: FakeStreakRepo(),
+                                        calendar: .current, now: { fixed })
+        let reg = GameRegistry()
+        reg.register(NBackGame())
+        reg.register(TapTheColorGame())
+        reg.register(HoderegningGame())
+        reg.register(ReaksjonGame())
+
+        let first = engine.todaysGameIds(from: reg, count: 3)
+        let second = engine.todaysGameIds(from: reg, count: 3)
+        XCTAssertEqual(first, second, "Samme dato skal gi samme utvalg")
+        XCTAssertEqual(first.count, 3)
+    }
+
+    func testTodaysGameIdsChangesAcrossDays() {
+        var fakeNow = Date(timeIntervalSince1970: 1_700_000_000)
+        let engine = DailySessionEngine(runs: FakeRunRepo(), streaks: FakeStreakRepo(),
+                                        calendar: .current, now: { fakeNow })
+        let reg = GameRegistry()
+        reg.register(NBackGame())
+        reg.register(TapTheColorGame())
+        reg.register(HoderegningGame())
+        reg.register(ReaksjonGame())
+
+        let day1 = engine.todaysGameIds(from: reg, count: 3)
+        fakeNow = fakeNow.addingTimeInterval(86_400) // +1 dag
+        let day2 = engine.todaysGameIds(from: reg, count: 3)
+        // Med 4 spill og C(4,3)=4 mulige kombinasjoner, kan to forskjellige dager teoretisk havne på samme utvalg.
+        // Vi sjekker at minst ÉN rotasjon skjer over flere dager.
+        var sawDifference = (day1 != day2)
+        for _ in 0..<5 where !sawDifference {
+            fakeNow = fakeNow.addingTimeInterval(86_400)
+            sawDifference = engine.todaysGameIds(from: reg, count: 3) != day1
+        }
+        XCTAssertTrue(sawDifference, "Skal rotere utvalget over flere dager")
+    }
+
+    func testTodaysGameIdsRespectsCountParameter() {
+        let engine = DailySessionEngine(runs: FakeRunRepo(), streaks: FakeStreakRepo(),
+                                        calendar: .current, now: { Date() })
+        let reg = GameRegistry()
+        reg.register(NBackGame())
+        reg.register(TapTheColorGame())
+        reg.register(HoderegningGame())
+        reg.register(ReaksjonGame())
+
+        XCTAssertEqual(engine.todaysGameIds(from: reg, count: 2).count, 2)
+        XCTAssertEqual(engine.todaysGameIds(from: reg, count: 4).count, 4)
+        XCTAssertEqual(engine.todaysGameIds(from: reg, count: 10).count, 4)  // capped
+    }
 }
