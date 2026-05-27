@@ -32,20 +32,6 @@ public final class DailySessionEngine {
         return ScoreCalculator.recommendDifficulty(currentLevel: last.difficultyEnum, recentScores: scores)
     }
 
-    /// Velger tilfeldig N spill for dagens økt, deterministisk per dato.
-    /// Samme dag = samme utvalg (slik at brukeren ikke får ny økt hvis han åpner appen flere ganger).
-    /// Neste dag = nytt seed = annet utvalg.
-    public func todaysGameIds(from registry: GameRegistry, count: Int = 3) -> [String] {
-        let allIds = registry.allGames.map(\.metadata.id).sorted()
-        if allIds.count <= count { return allIds }
-
-        let day = calendar.startOfDay(for: now())
-        let seed = UInt64(bitPattern: Int64(day.timeIntervalSince1970))
-        var rng = SystemRandomNumberGeneratorBox(seed: seed)
-        let shuffled = allIds.shuffled(using: &rng)
-        return Array(shuffled.prefix(count))
-    }
-
     public func didCompleteSessionToday() -> Bool {
         guard let state = try? streaks.load(),
               let last = state.lastSessionDate else { return false }

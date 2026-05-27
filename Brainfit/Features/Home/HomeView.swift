@@ -53,7 +53,7 @@ public struct HomeView: View {
 
     private var startButton: some View {
         Button {
-            let ids = engine.todaysGameIds(from: registry, count: 3)
+            let ids = registry.allGames.map(\.metadata.id)
             onStartSession(ids)
         } label: {
             Text(todayDone ? "Dagens trening fullført" : "Start dagens trening")
